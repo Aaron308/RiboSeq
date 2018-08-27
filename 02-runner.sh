@@ -11,24 +11,26 @@ fi
 #
 
 usage="USAGE:
-02-runner.sh <number of threads> <min length> <trim length>"
+02-runner.sh <number of threads> <min length> <trim length> <error rate>"
 
 ######### Setup ################
 threads=$1
-min_length=$2
-trim_length=$3
-if [ "$#" -lt "2" ]
+min=$2 #discard any reads that drop below this value
+trim_length=$3 #Prior to adapter removal, hard trim all reads back to this length 
+error_rate=$4 #Permitted error rate between sequence and adapter. If error rate is 0.1, then the maximum error allowed is 0.1 x the overlap (e.g. 1bp if overlap of 10bp), rounded down. 
+if [ "$#" -lt "4" ]
 then
 echo $usage
 exit -1
 else
-echo "initiating $1 parallel cutadapt quality trim and adapter removal jobs, minimum length $2, trimmed length $3"
+echo "initiating $1 parallel cutadapt adapter removal jobs, min length after filtering $min, sequences trimmed to $trim_length, error rate $error_rate"
 fi
 ########## Run #################
 
+
 #user defined variables that could be changed:
 workingdir=./
-script=$scriptdir/02-cutadapt.sh
+script=$scriptdir/03-cutadapt.sh
 outdir=reads_noadapt
 ###
 
@@ -46,7 +48,7 @@ cat $script > "$logdir/script.log"
 cat $0 > "$logdir/runner.log"
 cat $script
 
-findSamples | parallel -j $threads bash $script {} $min_length $trim_length \>logs/${outdir}.${timestamp}/{}.log 2\>\&1
+findSamples | parallel -j $threads bash $script {} $min $trim_length $error_rate \>logs/${outdir}.${timestamp}/{}.log 2\>\&1
 
 #To run, got to directory containing reads directory and call:
 #bash ~/path_to/02-runner.sh
