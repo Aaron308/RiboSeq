@@ -30,7 +30,7 @@ sample_dir=reads/$sample
 #List all files ending with '.fastq.gz' that are located within the specified sample directory and save these as the variable 'fastqs.'
 fastqs="$(ls $sample_dir/*q.gz)"
 
-#Creates a new directory called 'reads_noadapt' and within this a folder for the sample. This creates the directory to put the output from scythe into (next step).
+#Creates a new directory called 'reads_noadapt' and within this a folder for the sample. This creates the directory to put the output from into (next step).
 
 outdir="reads_noadapt/$sample"
 mkdir $outdir
@@ -39,10 +39,11 @@ mkdir $outdir
 #1) Keep the file names but remove the file extensions
 #2) Store the output files in the specified sample folder within the reads_noadapt directory. Store the file name as 'samplename.noadapt.fq.gz' 
 #3) Run the cutadapt function
-#4) The Bash shell will replace the $(<...) with the content of the given file. The config file contains the -a: The adaptor sequences
-#5) -q Quality threshold for trimming
-#5) -m Minimum read length: discard reads if trimmed to smaller than m
-#6) -M max rad length to keep
+#4) -a The adapter sequence to trim
+#5) -e Error rate for overlap between sequence and adapter 
+#6) -q Quality threshold for trimming
+#7) -m Minimum read length: discard reads if trimmed to smaller than m
+#8) -u Length to hard trim from 3' end prior to adapter trimming
 # -o output file (reads_noadapt/given sample name)
 # input file
 
@@ -52,22 +53,11 @@ fqname="$(basename $fq)"
 outputFile="$outdir/${fqname%%.*}.noadapt.fq.gz"
 
 cutadapt \
-$(<cutadapt.conf) \
+-a CTGTAGGCACCATCAAT \
 -e $error_rate \
+-q 20
 -m $min \
--M $max \
--O 3 \
---untrimmed-output $outputFile_untrimmed \
+-u $trim_length \
 -o $outputFile \
 $fq
 done
-
-# histogram of read lengths (cut adapt log file isnt always informative enough... double check too)
-# adapted from http://onetipperday.blogspot.com.au/2012/05/simple-way-to-get-reads-length.html
-# textHistogram from http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/textHistogram
-
-echo "read length distribution for $outputFile"
-zcat $outputFile | awk '{if(NR%4==2) print length($1)}' | textHistogram -maxBinCount=59 stdin
-
-echo "read length distribution for $outputFile_untrimmed"
-zcat $outputFile_untrimmed | awk '{if(NR%4==2) print length($1)}' | textHistogram -maxBinCount=59 stdin
