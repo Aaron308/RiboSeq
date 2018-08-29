@@ -21,8 +21,7 @@ fi
 #Defines the sample that we are working with to the command line as the first token.
 sample=$1
 min=$2
-trim_length=$3
-error_rate=$4
+error_rate=$3
 
 #Specifies the directory that the sample will be opened from.
 sample_dir=reads/$sample
@@ -51,13 +50,15 @@ for fq in $fastqs
 do
 fqname="$(basename $fq)"
 outputFile="$outdir/${fqname%%.*}.noadapt.fq.gz"
+untrimmedFile="outdir/${fgname%%.*}.untrimmed.fq.gz"
 
 cutadapt \
 -a CTGTAGGCACCATCAAT \
 -e $error_rate \
 -q 20
 -m $min \
--u $trim_length \
+--untrimmed-output $untrimmedFile \
+#-u $trim_length \
 -o $outputFile \
 $fq
 done
