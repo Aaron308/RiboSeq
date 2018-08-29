@@ -55,7 +55,7 @@ untrimmedFile="outdir/${fgname%%.*}.untrimmed.fq.gz"
 cutadapt \
 -a CTGTAGGCACCATCAAT \
 -e $error_rate \
--q 20
+-q 20 \
 -m $min \
 --untrimmed-output $untrimmedFile \
 #-u $trim_length \
