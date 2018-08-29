@@ -18,7 +18,7 @@ threads=$1
 min=$2 #discard any reads that drop below this value
 #trim_length=$3 #Prior to adapter removal, hard trim all reads back to this length 
 error_rate=$3 #Permitted error rate between sequence and adapter. If error rate is 0.1, then the maximum error allowed is 0.1 x the overlap (e.g. 1bp if overlap of 10bp), rounded down. 
-if [ "$#" -lt "4" ]
+if [ "$#" -lt "3" ]
 then
 echo $usage
 exit -1
