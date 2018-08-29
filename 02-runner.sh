@@ -16,8 +16,8 @@ usage="USAGE:
 ######### Setup ################
 threads=$1
 min=$2 #discard any reads that drop below this value
-trim_length=$3 #Prior to adapter removal, hard trim all reads back to this length 
-error_rate=$4 #Permitted error rate between sequence and adapter. If error rate is 0.1, then the maximum error allowed is 0.1 x the overlap (e.g. 1bp if overlap of 10bp), rounded down. 
+#trim_length=$3 #Prior to adapter removal, hard trim all reads back to this length 
+error_rate=$3 #Permitted error rate between sequence and adapter. If error rate is 0.1, then the maximum error allowed is 0.1 x the overlap (e.g. 1bp if overlap of 10bp), rounded down. 
 if [ "$#" -lt "4" ]
 then
 echo $usage
@@ -48,7 +48,7 @@ cat $script > "$logdir/script.log"
 cat $0 > "$logdir/runner.log"
 cat $script
 
-findSamples | parallel -j $threads bash $script {} $min $trim_length $error_rate \>logs/${outdir}.${timestamp}/{}.log 2\>\&1
+findSamples | parallel -j $threads bash $script {} $min $error_rate \>logs/${outdir}.${timestamp}/{}.log 2\>\&1
 
 #To run, got to directory containing reads directory and call:
 #bash ~/path_to/02-runner.sh
