@@ -61,7 +61,6 @@ cutadapt \
 -q 20 \
 -m $min \
 --untrimmed-output $outputFile_untrimmed \
-#-u $trim_length \
 -o $outputFile \
 $fq
 done
