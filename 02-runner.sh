@@ -30,7 +30,7 @@ fi
 
 #user defined variables that could be changed:
 workingdir=./
-script=$scriptdir/03-cutadapt.sh
+script=$scriptdir/02-cutadapt.sh
 outdir=reads_noadapt
 ###
 
