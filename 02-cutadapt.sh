@@ -34,6 +34,9 @@ fastqs="$(ls $sample_dir/*q.gz)"
 outdir="reads_noadapt/$sample"
 mkdir $outdir
 
+outdir_discard="reads_noadapt/${sample}/discard"
+mkdir $outdir_discard
+
 #This command runs cutadapt. It says 'for the fastqs listed within the sample directory do the following:
 #1) Keep the file names but remove the file extensions
 #2) Store the output files in the specified sample folder within the reads_noadapt directory. Store the file name as 'samplename.noadapt.fq.gz' 
@@ -50,14 +53,14 @@ for fq in $fastqs
 do
 fqname="$(basename $fq)"
 outputFile="$outdir/${fqname%%.*}.noadapt.fq.gz"
-untrimmedFile="outdir/${fgname%%.*}.untrimmed.fq.gz"
+outputFile_untrimmed="$outdir_discard/${fqname%%.*}.no_adapt_found.fq.gz"
 
 cutadapt \
--a CTGTAGGCACCATCAAT \
+-a "CTGTAGGCACCATCAAT" \
 -e $error_rate \
 -q 20 \
 -m $min \
---untrimmed-output $untrimmedFile \
+--untrimmed-output $outputFile_untrimmed \
 #-u $trim_length \
 -o $outputFile \
 $fq
