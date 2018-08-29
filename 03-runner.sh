@@ -17,7 +17,8 @@ usage="USAGE:
 threads=$1
 reads=$2
 b_threads=$3
-if [ "$#" -lt "3" ]
+refdir=$4
+if [ "$#" -lt "4" ]
 then
 echo $usage
 exit -1
@@ -44,7 +45,7 @@ cat $script > "$logdir/script.log"
 cat $0 > "$logdir/runner.log"
 cat $script
 
-findSamples | parallel -j $threads bash $script {} $reads $b_threads \>logs/${outdir}_bowtie2.${timestamp}/{}.log 2\>\&1
+findSamples | parallel -j $threads bash $script {} $reads $b_threads $refdir \>logs/${outdir}_bowtie2.${timestamp}/{}.log 2\>\&1
 
 #To run:
 #bash ~/path_to/03-runner.sh
