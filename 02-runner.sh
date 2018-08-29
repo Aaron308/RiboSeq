@@ -11,7 +11,7 @@ fi
 #
 
 usage="USAGE:
-02-runner.sh <number of threads> <min length> <trim length> <error rate>"
+02-runner.sh <number of threads> <min length> <error rate>"
 
 ######### Setup ################
 threads=$1
