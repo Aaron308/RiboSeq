@@ -11,7 +11,7 @@ fi
 #
 
 usage="USAGE:
-03-runner.sh <number of threads> <reads folder> <bowtie threads per job> <reference directory>"
+04-runner.sh <number of threads> <reads folder> <bowtie threads per job> <reference directory>"
 
 ######### Setup ################
 threads=$1
@@ -27,7 +27,7 @@ echo "initiating $1 parallel bowtie jobs on $reads folder, bowtie2 can use $b_th
 fi
 ########## Run #################
 
-script=$scriptdir/03-bowtie2.sh
+script=$scriptdir/04-bowtie2.sh
 ###
 
 function findSamples () {
@@ -48,4 +48,4 @@ cat $script
 findSamples | parallel -j $threads bash $script {} $reads $b_threads $refdir \>logs/${outdir}_bowtie2.${timestamp}/{}.log 2\>\&1
 
 #To run:
-#bash ~/path_to/03-runner.sh
+#bash ~/path_to/04-runner.sh
