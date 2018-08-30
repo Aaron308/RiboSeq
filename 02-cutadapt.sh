@@ -53,6 +53,7 @@ for fq in $fastqs
 do
 fqname="$(basename $fq)"
 outputFile="$outdir/${fqname%%.*}.noadapt.fq.gz"
+outputFile2="$outdir/${fqname%%.*}.trimmed.fq.gz"
 outputFile_untrimmed="$outdir_discard/${fqname%%.*}.no_adapt_found.fq.gz"
 
 cutadapt \
@@ -63,4 +64,12 @@ cutadapt \
 --untrimmed-output $outputFile_untrimmed \
 -o $outputFile \
 $fq
+
+cutadapt \
+-q 20 \
+-m $min \
+-o $outputFile2 \
+$outputFile
+
+rm -rv $outputFile
 done
