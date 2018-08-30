@@ -87,7 +87,7 @@ rm -v ${outsam} ${tmpbam}"
 samtools view -S -u $outsam > ${tmpbam}
 
 #Sort the temporary bam file by chromosomal position, and save the sorted file.
-samtools sort -m 2G ${tmpbam} $outbam
+samtools sort -m 2G ${tmpbam} $outbam.bam
 
 #Make an index of the sorted bam file
 samtools index ${outbam}.bam
