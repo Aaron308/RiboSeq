@@ -11,7 +11,7 @@ fi
 #
 
 usage="USAGE:
-03-runner.sh <number of threads> <reads folder> <bowtie threads per job>"
+03-runner.sh <number of threads> <reads folder> <bowtie threads per job> <reference directory>"
 
 ######### Setup ################
 threads=$1
