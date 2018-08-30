@@ -24,6 +24,6 @@ This step is NOT included in this repository, it is found in NGS-pipelines/RNAse
 
 ```
 usage: 02-runner.sh <number of threads> <minimum length> <maximum error rate>
-
-This will trim reads until average quality is phred 20 in a sliding window. It will also look for and remove the adapter sequence CTGTAGGCACCATCAAT, representing the Universal miRNA cloning linker used during library preparation. Reads that lack the adapter will be written to a separate file. 
 ```
+
+This will trim reads until average quality is phred 20 in a sliding window. It will also look for and remove the adapter sequence CTGTAGGCACCATCAAT, representing the Universal miRNA cloning linker used during library preparation. Reads that lack the adapter will be written to a separate file. A second trimming step is carried out after adapter removal. 
