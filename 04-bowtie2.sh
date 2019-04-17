@@ -56,7 +56,7 @@ bowtie2 \
 --mm \
 -D 20 \
 -R 3 \
--N 1 \
+-N 0 \
 -L 10 \
 -i S,1,0.50 \
 -p $b_threads \
