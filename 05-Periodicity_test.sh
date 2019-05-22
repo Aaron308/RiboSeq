@@ -25,7 +25,7 @@ sample_dir=$alignFolder/$sample
 outFolder="${outdir}/${sample}"
 mkdir ${outFolder}
 
-bedtools intersect -abam $sample_dir/$sample.bam -b $reference -bed -wo -S > $outFolder/$sample_intersect.temp.bed
+intersectBed -bed -wo -S -abam $sample_dir/$sample.bam -b $reference > $outFolder/$sample_intersect.temp.bed
 
 cut -f 1-3,6,14-16,19 $outFolder/$sample_intersect.temp.bed > $outFolder/$sample_intersect.bed
 
