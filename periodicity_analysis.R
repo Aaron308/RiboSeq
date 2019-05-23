@@ -66,6 +66,6 @@ end_summ <- end_50 %>%
   summarise(count=n()) %>%
   ungroup()
   
-write.table(input_period_summ,paste0(outFolder, "/",Sample, '_peridocity_summ.txt'),sep='\t',row.names=F,quote=F)
+write.table(input_period_summ,paste0(outFolder, "/",Sample, '_periodicity_summ.txt'),sep='\t',row.names=F,quote=F)
 write.table(start_summ,paste0(outFolder, "/",Sample, '_start_summ.txt'),sep='\t',row.names=F,quote=F)
 write.table(end_summ,paste0(outFolder, "/",Sample, '_end_summ.txt'),sep='\t',row.names=F,quote=F)
