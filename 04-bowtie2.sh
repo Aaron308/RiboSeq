@@ -56,11 +56,11 @@ bowtie2 \
 --mm \
 -D 20 \
 -R 3 \
--N 0 \
--L 10 \
+-N 1 \
+-l 5 \
 -i S,1,0.50 \
 -p $b_threads \
---score-min L,0,0 \
+#--score-min L,0,0 \
 -U $fastqs \
 -S "$outsam"
 
@@ -84,7 +84,7 @@ samtools index ${outbam}.bam
 rm -v ${outsam} ${tmpbam}"
 
 #Using samtools view to convert the sam file to bam file.
-samtools view -S -u $outsam > ${tmpbam}
+samtools view -q 10 -S -u $outsam > ${tmpbam}
 
 #Sort the temporary bam file by chromosomal position, and save the sorted file.
 samtools sort -m 2G ${tmpbam} -o $outbam.bam
