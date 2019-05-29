@@ -60,7 +60,6 @@ bowtie2 \
 -L 5 \
 -i S,1,0.50 \
 -p $b_threads \
-#--score-min L,0,0 \
 -U $fastqs \
 -S "$outsam"
 
