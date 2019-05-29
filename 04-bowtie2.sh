@@ -57,7 +57,7 @@ bowtie2 \
 -D 20 \
 -R 3 \
 -N 1 \
--l 5 \
+-L 5 \
 -i S,1,0.50 \
 -p $b_threads \
 #--score-min L,0,0 \
