@@ -24,7 +24,7 @@ mkdir periodicity/$i
 intersectBed -bed -wo -s -abam $alignFolder/$i/${i}_28.bam -b $reference > periodicity/$i/${i}_intersect.temp.bed
 cut -f 1-3,6,14-16,19 periodicity/$i/${i}_intersect.temp.bed > periodicity/$i/${i}_intersect.bed
 rm -rv periodicity/$i/${i}_intersect.temp.bed
+rm -rv $alignFolder/$i/${i}_28.bam
 done <samples_all.txt
 
 rm -rv samples_all.txt
-rm -rv $alignFolder/$i/${i}_28.bam
