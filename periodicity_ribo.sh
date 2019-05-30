@@ -21,7 +21,7 @@ do
 echo $alignFolder/$i/${i}.bam
 samtools view -h -q 10 $alignFolder/$i/${i}.bam | awk '(length($10) > 27 && length($10) < 29) || $1 ~ /^@/' | samtools view -bS - > $alignFolder/$i/${i}_28.bam
 mkdir periodicity/$i
-intersectBed -bed -wo -S -abam $alignFolder/$i/${i}_28.bam -b $reference > periodicity/$i/${i}_intersect.temp.bed
+intersectBed -bed -wo -s -abam $alignFolder/$i/${i}_28.bam -b $reference > periodicity/$i/${i}_intersect.temp.bed
 cut -f 1-3,6,14-16,19 periodicity/$i/${i}_intersect.temp.bed > periodicity/$i/${i}_intersect.bed
 rm -rv periodicity/$i/${i}_intersect.temp.bed
 done <samples_all.txt
