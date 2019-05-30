@@ -93,3 +93,9 @@ samtools index ${outbam}.bam
 
 #Delete the temporary bam.
 rm -v ${outsam} ${tmpbam}
+
+#Keep only unique reads
+samtools view -H $outbam.bam > ${outbam}.header.sam
+samtools view -F 4 $outbam.bam | grep -v "XS:" | ${outbam}.header.sam - | \
+samtools view -b - > ${outbam}.unique.bam
+rm ${outbam}.header.sam
