@@ -1,6 +1,4 @@
 #!/bin/bash
-# bamtobed
-#Takes bam file as input and outputs bed file
 
 #Set -e as an option, it tells the command line to exit the script immediately if it registers an error.
 set -e
