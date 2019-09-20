@@ -13,10 +13,10 @@ cd ..
 while read i;
 do
 echo $alignFolder/$i/${i}.bam
-samtools view -H $alignFolder/$i/${i}.bam > $alignFolder/$i/${i}.header.sam
-samtools view -F 4 $alignFolder/$i/${i}.bam | grep -v "XS:" | $alignFolder/$i/${i}.header.sam - | \
+samtools view -H $alignFolder/$i/${i}.bam > $alignFolder/$i/header.sam
+samtools view -F 4 $alignFolder/$i/${i}.bam | grep -v "XS:" | $alignFolder/$i/header.sam - | \
 samtools view -b - > $alignFolder/$i/${i}.unique.bam
-rm $alignFolder/$i/${i}.header.sam
+rm $alignFolder/$i/header.sam
 done <samples_all.txt
 
 rm -rv samples_all.txt
